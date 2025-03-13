@@ -8,5 +8,5 @@
 *.DS_Store
 *pyproject.toml
 *poetry.lock
-venv
+venv310
 .env
