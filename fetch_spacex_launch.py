@@ -16,7 +16,7 @@ def fetch_spacex_last_launch(args):
 
 def main():
     os.makedirs('images', exist_ok=True)
-    parser = argparse.ArgumentParser(description='''Default is latest lauches''')
+    parser = argparse.ArgumentParser(description='''Default is latest launch''')
     parser.add_argument('--id', help='ID', default='latest')
     args = parser.parse_args()
     fetch_spacex_last_launch(args.id)

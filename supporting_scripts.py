@@ -5,10 +5,10 @@ from urllib.parse import urlparse
 
 
 def displays_image_format(url):
-    responce = requests.get(url)
-    responce.raise_for_status()
-    responce_parse = urlparse(responce.url)
-    path_separation = os.path.splitext(responce_parse.path)
+    response = requests.get(url)
+    response.raise_for_status()
+    response_parse = urlparse(response.url)
+    path_separation = os.path.splitext(response_parse.path)
     path_image, changed_format = path_separation
     return changed_format
 

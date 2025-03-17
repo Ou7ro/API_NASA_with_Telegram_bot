@@ -8,7 +8,7 @@ from supporting_scripts import send_image
 
 
 def send_all_images(tg_token, tg_chat_id):
-    parse = argparse.ArgumentParser(description='''Отправляет все имеющиеся фото, по умолчанию, кажде 4 часа.
+    parse = argparse.ArgumentParser(description='''Отправляет все имеющиеся фото, по умолчанию, каждые 4 часа.
                                     Чтобы отправлять определенное фото, укажите в аргументе название файла''')
     parse.add_argument('-n', '--name', help='image name')
     args = parse.parse_args()
