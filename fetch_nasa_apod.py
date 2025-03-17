@@ -1,11 +1,11 @@
 import requests
-import os
 from environs import env
+from pathlib import Path
 from dotenv import load_dotenv
 from supporting_scripts import displays_image_format, download_file
 
 
-def fetch_nasa_apod(key):
+def fetch_nasa_apod(key, dir_path):
     url_nasa = 'https://api.nasa.gov/planetary/apod'
     payload = {
         'api_key': key,
@@ -22,15 +22,16 @@ def fetch_nasa_apod(key):
         img_url = url_content['url']
         image_addresses.append(img_url)
     for number, image in enumerate(image_addresses):
-        path = f'images/nasa_apod_{number}{displays_image_format(image)}'
+        path = Path(dir_path) / f'nasa_apod_{number}{displays_image_format(image)}'
         download_file(image, path)
 
 
 def main():
     load_dotenv()
-    os.makedirs('images', exist_ok=True)
+    dir_path = env.str('DIRECTORY_PATH', default='images')
+    Path(dir_path).mkdir(exist_ok=True)
     nasa_api_key = env.str('NASA_TOKEN')
-    fetch_nasa_apod(nasa_api_key)
+    fetch_nasa_apod(nasa_api_key, dir_path)
 
 
 if __name__ == '__main__':

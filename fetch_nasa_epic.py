@@ -1,12 +1,12 @@
 import requests
-import os
 import datetime
+from pathlib import Path
 from environs import env
 from dotenv import load_dotenv
 from supporting_scripts import download_file
 
 
-def fetch_nasa_apod(key):
+def fetch_nasa_apod(key, dir_path):
     url_nasa = 'https://api.nasa.gov/EPIC/api/natural/'
     payload = {
         'api_key': key,
@@ -20,15 +20,16 @@ def fetch_nasa_apod(key):
         date = datetime.datetime.fromisoformat(date_time)
         formatted_date = date.strftime('%Y/%m/%d')
         img_address = f'https://api.nasa.gov/EPIC/archive/natural/{formatted_date}/png/{name_image}.png'
-        path = f'images/epic_{number}.png'
+        path = Path(dir_path) / f'epic_{number}.png'
         download_file(img_address, path, payload)
 
 
 def main():
     load_dotenv()
-    os.makedirs('images', exist_ok=True)
+    dir_path = env.str('DIRECTORY_PATH', default='images')
+    Path(dir_path).mkdir(exist_ok=True)
     nasa_api_key = env.str('NASA_TOKEN')
-    fetch_nasa_apod(nasa_api_key)
+    fetch_nasa_apod(nasa_api_key, dir_path)
 
 
 if __name__ == '__main__':
