@@ -15,13 +15,13 @@ def fetch_nasa_apod(key):
     response = requests.get(url_nasa, params=payload)
     response.raise_for_status()
     url_contents = response.json()
-    image_adresses = []
+    image_addresses = []
     for url_content in url_contents:
         if 'video' in url_content['media_type']:
             continue
         img_url = url_content['url']
-        image_adresses.append(img_url)
-    for number, image in enumerate(image_adresses):
+        image_addresses.append(img_url)
+    for number, image in enumerate(image_addresses):
         path = f'images/nasa_apod_{number}{displays_image_format(image)}'
         download_file(image, path)
 
