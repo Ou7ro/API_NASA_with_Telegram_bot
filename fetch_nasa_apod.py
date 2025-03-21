@@ -5,13 +5,13 @@ from supporting_scripts import displays_image_format, download_file
 
 
 def fetch_nasa_apod(key, dir_path):
-    url_nasa = 'https://api.nasa.gov/planetary/apod'
+    nasa_url = 'https://api.nasa.gov/planetary/apod'
     payload = {
         'api_key': key,
         'count': 30,
         'thumbs': False,
     }
-    response = requests.get(url_nasa, params=payload)
+    response = requests.get(nasa_url, params=payload)
     response.raise_for_status()
     url_contents = response.json()
     image_addresses = []

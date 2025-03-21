@@ -6,11 +6,11 @@ from supporting_scripts import download_file
 
 
 def fetch_nasa_apod(key, dir_path):
-    url_nasa = 'https://api.nasa.gov/EPIC/api/natural/'
+    nasa_url = 'https://api.nasa.gov/EPIC/api/natural/'
     payload = {
         'api_key': key,
     }
-    response = requests.get(url_nasa, params=payload)
+    response = requests.get(nasa_url, params=payload)
     response.raise_for_status()
     url_contents = response.json()
     for number, url_content in enumerate(url_contents):

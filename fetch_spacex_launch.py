@@ -6,8 +6,8 @@ from supporting_scripts import download_file
 
 
 def fetch_spacex_last_launch(args, dir_path):
-    url_spacex = 'https://api.spacexdata.com/v5/launches/{0}'.format(args)
-    response = requests.get(url_spacex)
+    spacex_url = 'https://api.spacexdata.com/v5/launches/{0}'.format(args)
+    response = requests.get(spacex_url)
     response.raise_for_status()
     departure_images = response.json()['links']['flickr']['original']
     for number, picture in enumerate(departure_images):
