@@ -7,21 +7,24 @@ from supporting_scripts import send_image
 from telegram.error import NetworkError
 
 
-def send_all_images(tg_token, tg_chat_id, seconds, file_names, dir_path):
+def send_all_images(tg_token, tg_chat_id, seconds, file_paths):
     while True:
-        for file_name in file_names:
-            file_path = Path(dir_path) / file_name
+        for file_path in file_paths:
             try:
                 send_image(tg_token, file_path, tg_chat_id)
                 sleep(seconds)
             except NetworkError:
                 sleep(10)
-        shuffle(file_names)
+        shuffle(file_paths)
 
 
-def enumeration_file_names(path):
+def create_file_paths(path):
+    file_paths = []
     for dirpath, dirnames, filenames in os.walk(path):
-        return filenames
+        for file_name in filenames:
+            file_path = Path(dirpath) / file_name
+            file_paths.append(file_path)
+        return file_paths
 
 
 def main():
@@ -31,8 +34,8 @@ def main():
     seconds = env.int('TIME', default=14400)
     dir_path = env.str('DIRECTORY_PATH', default='images')
     Path(dir_path).mkdir(exist_ok=True)
-    file_names = enumeration_file_names(dir_path)
-    send_all_images(tg_token, tg_chat_id, seconds, file_names, dir_path)
+    file_paths = create_file_paths(dir_path)
+    send_all_images(tg_token, tg_chat_id, seconds, file_paths)
 
 
 if __name__ == '__main__':
