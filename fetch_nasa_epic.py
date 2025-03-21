@@ -2,7 +2,6 @@ import requests
 import datetime
 from pathlib import Path
 from environs import env
-from dotenv import load_dotenv
 from supporting_scripts import download_file
 
 
@@ -25,7 +24,7 @@ def fetch_nasa_apod(key, dir_path):
 
 
 def main():
-    load_dotenv()
+    env.read_env()
     dir_path = env.str('DIRECTORY_PATH', default='images')
     Path(dir_path).mkdir(exist_ok=True)
     nasa_api_key = env.str('NASA_TOKEN')

@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 import os
 import argparse
 from pathlib import Path
@@ -8,7 +7,7 @@ from supporting_scripts import send_image
 
 
 def main():
-    load_dotenv()
+    env.read_env()
     tg_token = env.str('TG_TOKEN')
     tg_chat_id = env.str('TG_CHAT_ID')
     dir_path = env.str('DIRECTORY_PATH', default='images')

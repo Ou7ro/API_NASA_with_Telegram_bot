@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 import os
 from pathlib import Path
 from random import shuffle
@@ -26,7 +25,7 @@ def enumeration_file_names(path):
 
 
 def main():
-    load_dotenv()
+    env.read_env()
     tg_token = env.str('TG_TOKEN')
     tg_chat_id = env.str('TG_CHAT_ID')
     seconds = env.int('TIME', default=14400)
