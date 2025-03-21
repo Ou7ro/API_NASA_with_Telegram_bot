@@ -4,10 +4,10 @@ from pathlib import Path
 from supporting_scripts import displays_image_format, download_file
 
 
-def fetch_nasa_apod(key, dir_path):
+def fetch_nasa_apod(nasa_api_key, dir_path):
     nasa_url = 'https://api.nasa.gov/planetary/apod'
     payload = {
-        'api_key': key,
+        'api_key': nasa_api_key,
         'count': 30,
         'thumbs': False,
     }

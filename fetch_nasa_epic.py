@@ -5,10 +5,10 @@ from environs import env
 from supporting_scripts import download_file
 
 
-def fetch_nasa_apod(key, dir_path):
+def fetch_nasa_apod(nasa_api_key, dir_path):
     nasa_url = 'https://api.nasa.gov/EPIC/api/natural/'
     payload = {
-        'api_key': key,
+        'api_key': nasa_api_key,
     }
     response = requests.get(nasa_url, params=payload)
     response.raise_for_status()
